@@ -1,6 +1,5 @@
 #!/bin/bash
 export FLASK_APP=./app.py
-# export FLASK_APP=./src/main.py
 # source $(python --venv)/bin/activate
 # FLASK_ENV=development
 # optional debug mode

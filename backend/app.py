@@ -7,15 +7,26 @@ from src.entities.exam import Exam, ExamSchema
 
 # creating the Flask application
 app = Flask(__name__)
+# print('App Name:', __name__)
 CORS(app)
 
 # generate database schema
 Base.metadata.create_all(engine)
 
 
+@app.route('/', methods=['GET'])
+def hello_world():
+    return 'Private API'
+
+
+@app.route('/mfume')
+def fun_print():
+    return 'My Flask App'
+
+
 @app.route('/get')
 def get_print():
-    return "My Flask App"
+    return "My Flask App (get)"
 
 
 @app.route('/exams')
