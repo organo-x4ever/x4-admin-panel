@@ -1,30 +1,13 @@
 # coding=utf-8
 
+from flask_cors import CORS
 from flask import Flask, jsonify, request
 from src.entities.entity import Session, engine, Base
 from src.entities.exam import Exam, ExamSchema
 
-app = Flask(__name__)
-
-
-@app.route('/', methods=['GET'])
-def hello_world():
-    return 'Private API'
-
-
-@app.route('/mfume')
-def fun_print():
-    return 'My Flask App'
-
-
-@app.route('/get')
-def get_print():
-    return "My Flask App (get)"
-
-
 # creating the Flask application
 app = Flask(__name__)
-print('App Name:', __name__)
+CORS(app)
 
 # generate database schema
 Base.metadata.create_all(engine)
