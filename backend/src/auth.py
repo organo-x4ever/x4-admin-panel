@@ -5,9 +5,9 @@ from urllib.request import urlopen
 from flask import request, _request_ctx_stack
 from jose import jwt
 
-AUTH0_DOMAIN = 'bk-samples.auth0.com'
+AUTH0_DOMAIN = 'deolgurpreet.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'https://online-exam.digituz.com.br'
+API_AUDIENCE = 'python-angular'
 
 
 class AuthError(Exception):

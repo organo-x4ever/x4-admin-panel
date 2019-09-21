@@ -1,11 +1,11 @@
 # coding=utf-8
 
-from flask_cors import CORS
 from flask import Flask, jsonify, request
+from flask_cors import CORS
+
+from src.auth import AuthError, requires_auth
 from src.entities.entity import Session, engine, Base
 from src.entities.exam import Exam, ExamSchema
-
-from src.auth import AuthError,requires_auth
 
 # creating the Flask application
 app = Flask(__name__)
@@ -48,21 +48,34 @@ def get_exams():
 @requires_auth
 def add_exam():
     # mount exam object
-    posted_exam = ExamSchema(only=('title', 'description')) \
-        .load(request.get_json())
-    #
-    exam = Exam(**posted_exam, created_by="HTTP post request")
-    #
-    # persist exam
-    session = Session()
-    session.add(exam)
-    session.commit()
-    #
-    # return created exam
-    new_exam = ExamSchema().dump(exam)
-    session.close()
-    return jsonify(new_exam), 201
-    # return "add_exam()"
+    try:
+        posted_exam = ExamSchema(only=('title', 'description')) \
+            .load(request.get_json())
+
+        exam = Exam(**posted_exam, created_by="HTTP post request")
+
+        # persist exam
+        session = Session()
+
+        session.add(exam)
+
+        session.commit()
+
+        # return created exam
+        new_exam = ExamSchema().dump(exam)
+
+        session.close()
+
+        return jsonify(new_exam), 201
+    except Exception as ex:
+        x = ex.args;
+        return """{
+        "created_at": "2019-09-20T15:51:18.849454",
+        "description": """ + str(x) + """,
+        "id": 9.0,
+        "last_updated_by": "TEST",
+        "title": "TEST",
+        "updated_at": "2019-09-20T15:51:18.849454"}"""
 
 
 @app.errorhandler(AuthError)
