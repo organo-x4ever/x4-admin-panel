@@ -71,8 +71,9 @@ export class ExamsComponent implements OnInit, OnDestroy {
       return false;
     }
 
-    const roles = Auth0.getProfile()['http://127.0.0.1/roles'];
-    return roles.include('admin');
+    const roles = Auth0.getProfile()['http://127.0.0.1:4200/roles'];
+    console.log('roles', roles, roles.includes('admin'));
+    roles.includes('admin');
   }
 
   ngOnDestroy() {
