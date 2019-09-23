@@ -15,7 +15,7 @@ import {ExamsApiService} from '../exam-api.service';
                   <mat-card-title>{{exam.title}}</mat-card-title>
                   <mat-card-subtitle>{{exam.description}}</mat-card-subtitle>
                   <p>
-                      Implement different technique on online project.
+                      {{exam.long_description}}
                   </p>
                   <button mat-raised-button color="accent">Start Exam</button>
                   <button mat-button color="warn" *ngIf="isAdmin()"
