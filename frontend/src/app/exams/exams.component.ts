@@ -18,6 +18,10 @@ import {ExamsApiService} from '../exam-api.service';
                       Implement different technique on online project.
                   </p>
                   <button mat-raised-button color="accent">Start Exam</button>
+                  <button mat-button color="warn" *ngIf="isAdmin()"
+                          (click)="delete(exam.id)">
+                      Delete
+                  </button>
               </mat-card-content>
           </mat-card>
       </div>
@@ -46,6 +50,29 @@ export class ExamsComponent implements OnInit, OnDestroy {
       );
     const self = this;
     Auth0.subscribe((authenticated) => (self.authenticated = authenticated));
+  }
+
+  delete(examId: number) {
+    this.examsApi
+      .deleteExam(examId)
+      .subscribe(() => {
+        this.examsListSubs = this.examsApi
+          .getExams()
+          .subscribe(res => {
+              this.examsList = res;
+            },
+            console.error
+          );
+      }, console.error);
+  }
+
+  isAdmin() {
+    if (!Auth0.isAuthenticated()) {
+      return false;
+    }
+
+    const roles = Auth0.getProfile()['http://127.0.0.1/roles'];
+    return roles.include('admin');
   }
 
   ngOnDestroy() {
