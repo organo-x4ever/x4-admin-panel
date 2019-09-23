@@ -10,10 +10,9 @@ import * as Auth0 from 'auth0-web';
 
           <!-- This fills the remaining space of the current row -->
           <span class="fill-remaining-space"></span>
-
-<!--          <label *ngIf="!authenticated">{{getProfile().name}}</label>-->
+          <button mat-button *ngIf="authenticated">Hello, {{getProfile().name}}</button>
           <button mat-button (click)="signIn()" *ngIf="!authenticated">Sign In</button>
-          <button mat-button (click)="signOut()" *ngIf="authenticated">Sign Out</button>
+          <button mat-button (click)="signOut()" *ngIf="authenticated" color="warn">Sign Out</button>
       </mat-toolbar>
       <div class="view-container">
           <router-outlet></router-outlet>
