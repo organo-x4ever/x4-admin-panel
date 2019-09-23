@@ -3,7 +3,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-from src.auth import AuthError, requires_auth
+from src.auth import AuthError
+from src.auth import requires_auth, requires_role
 from src.entities.entity import Session, engine, Base
 from src.entities.exam import Exam, ExamSchema
 
@@ -49,7 +50,7 @@ def get_exams():
 def add_exam():
     # mount exam object
     try:
-        posted_exam = ExamSchema(only=('title', 'description')) \
+        posted_exam = ExamSchema(only=('title', 'description', 'long_description')) \
             .load(request.get_json())
 
         exam = Exam(**posted_exam, created_by="HTTP post request")
@@ -76,6 +77,17 @@ def add_exam():
         "last_updated_by": "TEST",
         "title": "TEST",
         "updated_at": "2019-09-20T15:51:18.849454"}"""
+
+
+@app.route('/exams/<examId>', methods=['DELETE'])
+@requires_role('admin')
+def delete_exam(examId):
+    session = Session()
+    exam = session.query(Exam).filter_by(id=examId).first()
+    session.delete(exam)
+    session.commit()
+    session.close()
+    return '', 201
 
 
 @app.errorhandler(AuthError)
