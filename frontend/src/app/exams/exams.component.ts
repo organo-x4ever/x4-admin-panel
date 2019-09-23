@@ -27,8 +27,6 @@ export class ExamsComponent implements OnInit, OnDestroy {
   authenticated = false;
 
   constructor(private examsApi: ExamsApiService) {
-    console.log(Auth0.getProfile().user_metadata);
-    console.log(Auth0.getProfile());
   }
 
   signIn = Auth0.signIn;
