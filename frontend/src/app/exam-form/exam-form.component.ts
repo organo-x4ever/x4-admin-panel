@@ -12,7 +12,7 @@ import {Exam} from '../exam.model';
           <input id="exam-title" (keyup)="updateTitle($event)">
           <label for="exam-description">Description</label>
           <input id="exam-description" (keyup)="updateDescription($event)">
-          <button (click)="saveExam()">Save Exam</button>
+          <button mat-raised-button color="accent" (click)="saveExam()">Save Exam</button>
       </div>
   `,
   styleUrls: ['./exam-form.component.css']

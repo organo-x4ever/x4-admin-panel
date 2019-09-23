@@ -5,7 +5,7 @@ import * as Auth0 from 'auth0-web';
   selector: 'app-root',
   template: `
       <mat-toolbar color="primary" class="mat-elevation-z10">
-          <button mat-button>Online Exams</button>
+          <button mat-button routerLink="/">Online Exams</button>
           <button mat-button>About</button>
 
           <!-- This fills the remaining space of the current row -->
@@ -14,8 +14,9 @@ import * as Auth0 from 'auth0-web';
           <button mat-button (click)="signIn()" *ngIf="!authenticated">Sign In</button>
           <button mat-button (click)="signOut()" *ngIf="authenticated">Sign Out</button>
       </mat-toolbar>
-
-      <router-outlet></router-outlet>
+      <div class="view-container">
+          <router-outlet></router-outlet>
+      </div>
   `,
   styleUrls: ['./app.component.css']
 })

@@ -7,14 +7,24 @@ import {ExamsApiService} from '../exam-api.service';
 @Component({
   selector: 'app-exams',
   template: `
-      <div>
-          <button routerLink="/new-exam">New Exam</button>
-          <ul>
-              <li *ngFor="let exam of examsList">
-                  {{exam.title}}
-              </li>
-          </ul>
-      </div>`,
+      <h2>Exams</h2>
+      <p>Choose an exam and start studying.</p>
+      <div class="exams">
+          <mat-card class="example-card" *ngFor="let exam of examsList" class="mat-elevation-z5">
+              <mat-card-content>
+                  <mat-card-title>{{exam.title}}</mat-card-title>
+                  <mat-card-subtitle>{{exam.description}}</mat-card-subtitle>
+                  <p>
+                      Implement different technique on online project.
+                  </p>
+                  <button mat-raised-button color="accent">Start Exam</button>
+              </mat-card-content>
+          </mat-card>
+      </div>
+      <button mat-fab color="primary" *ngIf="authenticated"
+              class="new-exam" routerLink="/new-exam">
+          <i class="material-icons">note_add</i>
+      </button>`,
   styleUrls: ['./exams.component.css']
 })
 export class ExamsComponent implements OnInit, OnDestroy {
