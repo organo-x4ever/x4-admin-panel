@@ -1,6 +1,6 @@
 
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/material';
+import {MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule } from '@angular/material';
 
 import * as Auth0 from 'auth0-web';
 import {BrowserModule} from '@angular/platform-browser';
@@ -37,7 +37,8 @@ const appRoutes: Routes = [
     NoopAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule
   ],
   providers: [ExamsApiService],
   bootstrap: [AppComponent]

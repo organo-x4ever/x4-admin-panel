@@ -6,14 +6,26 @@ import {Exam} from '../exam.model';
 @Component({
   selector: 'app-exam-form',
   template: `
-      <div>
-          <h2>New Exam</h2>
-          <label for="exam-title">Title</label>
-          <input id="exam-title" (keyup)="updateTitle($event)">
-          <label for="exam-description">Description</label>
-          <input id="exam-description" (keyup)="updateDescription($event)">
-          <button mat-raised-button color="accent" (click)="saveExam()">Save Exam</button>
-      </div>
+      <mat-card>
+      <h2>New Exam</h2>
+        <mat-form-field class="full-width">
+          <input matInput
+                 placeholder="Title"
+                 (keyup)="updateTitle($event)">
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput
+                 placeholder="Description"
+                 (keyup)="updateDescription($event)">
+        </mat-form-field>
+
+        <button mat-raised-button
+                color="primary"
+                (click)="saveExam()">
+          Save Exam
+        </button>
+    </mat-card>
   `,
   styleUrls: ['./exam-form.component.css']
 })
