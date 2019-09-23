@@ -9,9 +9,6 @@ import {ExamsApiService} from '../exam-api.service';
   template: `
       <div>
           <button routerLink="/new-exam">New Exam</button>
-          <button (click)="signIn()" *ngIf="!authenticated">Sign In</button>
-          <button (click)="signOut()" *ngIf="authenticated">Sign Out</button>
-          <p *ngIf="authenticated">Hello, {{getProfile().name}}</p>
           <ul>
               <li *ngFor="let exam of examsList">
                   {{exam.title}}
@@ -28,11 +25,6 @@ export class ExamsComponent implements OnInit, OnDestroy {
 
   constructor(private examsApi: ExamsApiService) {
   }
-
-  signIn = Auth0.signIn;
-  signOut = Auth0.signOut;
-  getProfile = Auth0.getProfile;
-
 
   ngOnInit() {
     this.examsListSubs = this.examsApi
