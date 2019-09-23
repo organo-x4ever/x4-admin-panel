@@ -18,8 +18,7 @@ import {ExamsApiService} from '../exam-api.service';
                       {{exam.long_description}}
                   </p>
                   <button mat-raised-button color="accent">Start Exam</button>
-                  <button mat-button color="warn" *ngIf="isAdmin()"
-                          (click)="delete(exam.id)">
+                  <button mat-button color="warn" (click)="delete(exam.id)" *ngIf="isAdmin()">
                       Delete
                   </button>
               </mat-card-content>
@@ -72,8 +71,11 @@ export class ExamsComponent implements OnInit, OnDestroy {
     }
 
     const roles = Auth0.getProfile()['http://127.0.0.1:4200/roles'];
-    console.log('roles', roles, roles.includes('admin'));
-    roles.includes('admin');
+    if (roles.includes('admin')) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   ngOnDestroy() {
